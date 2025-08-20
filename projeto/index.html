@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Amor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #2c0036 0%, #0d0015 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: white;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(10, 0, 20, 0.85);
+            border-radius: 25px;
+            box-shadow: 0 0 25px rgba(254, 7, 89, 0.4),
+                        0 0 50px rgba(158, 0, 255, 0.2);
+            overflow: hidden;
+            position: relative;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(254, 7, 89, 0.3);
+            z-index: 10;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #fe0759, #ff2a75, #ff4e92, #ff70af, #ff8ecb);
+            z-index: -1;
+            border-radius: 35px;
+            animation: glowing 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glowing {
+            0% {
+                filter: blur(15px);
+                opacity: 0.6;
+            }
+            100% {
+                filter: blur(25px);
+                opacity: 0.8;
+            }
+        }
+        
+        .header {
+            background: linear-gradient(to right, #fe0759, #ff2a75);
+            color: white;
+            padding: 25px 20px 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(254, 7, 89, 0.4);
+        }
+        
+        .time {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+        }
+        
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            letter-spacing: 0.5px;
+        }
+        
+        .slideshow {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            border-bottom: 3px solid #fe0759;
+            aspect-ratio: 9 / 16;
+            object-fit: cover;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        
+        .slide-counter {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(254, 7, 89, 0.5);
+            box-shadow: 0 0 10px rgba(254, 7, 89, 0.5);
+        }
+        
+        .content {
+            padding: 25px;
+        }
+        
+        .counter {
+            background: linear-gradient(to right, rgba(254, 7, 89, 0.2), rgba(158, 0, 255, 0.2));
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(254, 7, 89, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .counter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, #fe0759, #9e00ff);
+            animation: neon-line 2s infinite linear;
+        }
+        
+        @keyframes neon-line {
+            0% {
+                background-position: -100% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+        
+        .counter-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ff7eb3;
+            text-shadow: 0 0 10px rgba(255, 126, 179, 0.7);
+        }
+        
+        .time-together {
+            font-size: 26px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 8px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+        
+        .detailed-time {
+            font-size: 18px;
+            color: #ffb3d9;
+            text-shadow: 0 0 5px rgba(255, 179, 217, 0.7);
+        }
+        
+        .start-date {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #d994ff;
+        }
+        
+        .message {
+            background: rgba(20, 0, 40, 0.6);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(158, 0, 255, 0.3);
+        }
+        
+        .message-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ff7eb3;
+            text-shadow: 0 0 10px rgba(255, 126, 179, 0.7);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .message-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #f2d9ff;
+            text-shadow: 0 0 5px rgba(242, 217, 255, 0.5);
+        }
+        
+        .hashtags {
+            background: rgba(20, 0, 40, 0.6);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(254, 7, 89, 0.3);
+            text-align: center;
+        }
+        
+        .hashtags-text {
+            font-size: 16px;
+            color: #ff70af;
+            text-shadow: 0 0 10px rgba(255, 112, 175, 0.7);
+        }
+        
+        .heart-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 28px;
+            text-shadow: 0 0 15px rgba(254, 7, 89, 0.8);
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            5% { transform: scale(1.2); }
+            10% { transform: scale(1.1); }
+            15% { transform: scale(1.3); }
+            50% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+        
+        .music-note {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px 12px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 20;
+        }
+        
+        .music-note:hover {
+            background: rgba(254, 7, 89, 0.7);
+            transform: scale(1.05);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #cc99ff;
+            border-top: 1px solid rgba(254, 7, 89, 0.3);
+            text-shadow: 0 0 5px rgba(204, 153, 255, 0.7);
+        }
+        
+        /* Overlay para tocar música */
+        .play-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .play-button {
+            background: linear-gradient(to right, #fe0759, #ff2a75);
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 0 20px rgba(254, 7, 89, 0.7);
+            transition: all 0.3s ease;
+        }
+        
+        .play-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(254, 7, 89, 0.9);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 20px;
+                max-width: 90%;
+            }
+            
+            .header {
+                padding: 20px 15px 15px;
+            }
+            
+            .title {
+                font-size: 20px;
+            }
+            
+            .slideshow {
+                height: 250px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .time-together {
+                font-size: 22px;
+            }
+            
+            .detailed-time {
+                font-size: 16px;
+            }
+            
+            .message-text {
+                font-size: 14px;
+            }
+            
+            .hashtags-text {
+                font-size: 14px;
+            }
+            
+            .heart-icon {
+                font-size: 24px;
+                top: 15px;
+                left: 15px;
+            }
+            
+            .music-note {
+                font-size: 14px;
+                bottom: 15px;
+                left: 15px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .slideshow {
+                height: 200px;
+            }
+            
+            .time-together {
+                font-size: 20px;
+            }
+            
+            .counter-title {
+                font-size: 18px;
+            }
+            
+            .message-title {
+                font-size: 16px;
+            }
+            
+            .heart-icon {
+                font-size: 20px;
+            }
+            
+            .play-button {
+                padding: 12px 30px;
+                font-size: 16px;
+            }
+        }
+        
+        /* Efeitos de neon */
+        .neon-text {
+            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fe0759, 0 0 20px #fe0759;
+        }
+        
+        .neon-border {
+            box-shadow: 0 0 5px rgba(254, 7, 89, 0.7), 0 0 15px rgba(254, 7, 89, 0.5);
+        }
+        
+        /* Estilos para os corações caindo */
+        .falling-heart {
+            position: fixed;
+            top: -50px;
+            font-size: 20px;
+            color: #ff2a75;
+            text-shadow: 0 0 10px rgba(254, 7, 89, 0.8);
+            z-index: 1;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear forwards;
+            will-change: transform, opacity;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Ajustes para dispositivos móveis */
+        @media (max-width: 768px) {
+            .falling-heart {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .falling-heart {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Área onde os corações serão gerados -->
+    <div id="hearts-container"></div>
+    
+    <!-- Overlay para tocar música -->
+    <div class="play-overlay" id="play-overlay">
+        <h2>Feliz 4 anos de namoro para nós!</h2>
+        <p>Clique no botão abaixo para tocar a música</p>
+        <button class="play-button" id="play-button">
+            <i class="fas fa-play"></i> Tocar Música
+        </button>
+    </div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="heart-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="time" id="current-time">10:14</div>
+            <div class="title neon-text">Te amo mais que tudo</div>
+        </div>
+        
+        <div class="slideshow">
+            <div class="slide active" style="background-image: url('image/img1.jpeg');"></div>
+            <div class="slide" style="background-image: url('image/img2.jpeg');"></div>
+            <div class="slide" style="background-image: url('image/img3.jpeg');"></div>
+            <div class="slide" style="background-image: url('image/img4.jpeg');"></div>
+            <div class="slide" style="background-image: url('image/img5.jpeg');"></div>
+            <div class="slide" style="background-image: url('image/img6.jpeg');"></div>
+            <div class="slide" style="background-image: url('image/img7.jpeg');"></div>
+            
+            <div class="slide-counter">1/5</div>
+            <div class="music-note" id="music-control">
+                <i class="fas fa-play" id="music-icon"></i> <span id="music-text">Apocalypse - Cigarettes After Sex</span>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="counter">
+                <div class="counter-title">Juntos</div>
+                <div class="time-together" id="time-together">Carregando...</div>
+                <div class="detailed-time" id="detailed-time">Carregando...</div>
+                <div class="start-date" id="start-date">Desde 23 de Agosto de 2021</div>
+            </div>
+            
+            <div class="message">
+                <div class="message-title">
+                    <i class="fas fa-heart"></i> Oiii, Meu amor!
+                </div>
+                <div class="message-text">
+                    Eu te amo tanto, meu amor! A sua presença na minha vida me faz o homem mais feliz e sortudo do mundo.
+                    Cada minuto e cada segundo ao seu lado são incrivelmente especiais. 
+                    Os melhores momentos da minha vida eu vivi e continuo vivendo com você.
+                    São quatro anos de uma história que eu não quero que termine. 
+                    Obrigado por fazer parte da minha vida e a deixar tão mais colorida. Meu amor por você é infinito.
+                </div>
+            </div>
+            
+            <div class="hashtags">
+                <div class="hashtags-text">
+                    "You've been locked in here forever, and you just can't say goodbye"
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            By: Ramon Dantas
+        </div>
+    </div>
+
+    <!-- Elemento de áudio -->
+    <audio id="background-music" loop>
+        <source src="music/musica.MP3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+    </audio>
+
+    <script>
+        // Configuração do áudio
+        const audio = document.getElementById('background-music');
+        const playOverlay = document.getElementById('play-overlay');
+        const playButton = document.getElementById('play-button');
+        const musicControl = document.getElementById('music-control');
+        const musicIcon = document.getElementById('music-icon');
+        const musicText = document.getElementById('music-text');
+        
+        let isPlaying = false;
+        
+        // Função para tocar a música
+        function playMusic() {
+            audio.play().then(() => {
+                isPlaying = true;
+                playOverlay.style.display = 'none';
+                musicIcon.classList.remove('fa-play');
+                musicIcon.classList.add('fa-pause');
+                musicText.textContent = 'Apocalypse - Cigarettes After Sex';
+            }).catch(error => {
+                console.log('Reprodução automática impedida:', error);
+                playOverlay.querySelector('p').textContent = 
+                    'A reprodução automática foi bloqueada. Por favor, clique para tocar a música.';
+            });
+        }
+        
+        // Função para pausar/retomar a música
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                musicIcon.classList.remove('fa-pause');
+                musicIcon.classList.add('fa-play');
+                musicText.textContent = 'Tocar música';
+            } else {
+                audio.play().then(() => {
+                    musicIcon.classList.remove('fa-play');
+                    musicIcon.classList.add('fa-pause');
+                    musicText.textContent = 'Apocalypse - Cigarettes After Sex';
+                });
+            }
+            isPlaying = !isPlaying;
+        }
+        
+        // Event listeners
+        playButton.addEventListener('click', playMusic);
+        musicControl.addEventListener('click', toggleMusic);
+        
+        // Configuração do slideshow
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const slideCounter = document.querySelector('.slide-counter');
+        const totalSlides = slides.length;
+        
+        // Atualiza o contador de slides
+        function updateSlideCounter() {
+            slideCounter.textContent = `${currentSlide + 1}/${totalSlides}`;
+        }
+        
+        // Inicia o slideshow
+        function startSlideshow() {
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % totalSlides;
+                slides[currentSlide].classList.add('active');
+                updateSlideCounter();
+            }, 4000);
+        }
+        
+        // Função para calcular a diferença entre datas de forma precisa
+        function calculateDateDifference(startDate, endDate) {
+            let years = endDate.getFullYear() - startDate.getFullYear();
+            let months = endDate.getMonth() - startDate.getMonth();
+            let days = endDate.getDate() - startDate.getDate();
+            
+            // Ajuste para meses/dias negativos
+            if (days < 0) {
+                months--;
+                // Obter o último dia do mês anterior
+                const lastDayOfMonth = new Date(endDate.getFullYear(), endDate.getMonth(), 0).getDate();
+                days += lastDayOfMonth;
+            }
+            
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+            
+            return { years, months, days };
+        }
+        
+        // Atualiza o contador de tempo em tempo real
+        function updateTimeTogether() {
+            // Data de início do relacionamento (23 de agosto de 2021)
+            const startDate = new Date('2021-08-23');
+            const now = new Date();
+            
+            // Calcula a diferença precisa entre as datas
+            const diff = calculateDateDifference(startDate, now);
+            
+            // Calcula horas, minutos e segundos
+            const seconds = Math.floor((now - startDate) / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            
+            const remainingHours = hours % 24;
+            const remainingMinutes = minutes % 60;
+            const remainingSeconds = seconds % 60;
+            
+            // Atualiza o texto
+            document.getElementById('time-together').textContent = 
+                `${diff.years} anos, ${diff.months} meses, ${diff.days} dias`;
+                
+            document.getElementById('detailed-time').textContent = 
+                `${remainingHours} horas, ${remainingMinutes} minutos e ${remainingSeconds} segundos`;
+        }
+        
+        // Atualiza o horário atual
+        function updateCurrentTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            document.getElementById('current-time').textContent = `${hours}:${minutes}`;
+        }
+        
+        // Função para criar corações caindo
+        function createFallingHearts() {
+            const heartsContainer = document.getElementById('hearts-container');
+            const heartIcons = ['❤️', '💖', '💕', '💗', '💓', '💘', '💝'];
+            
+            // Verificar se é um dispositivo móvel
+            const isMobile = window.matchMedia("(max-width: 768px)").matches;
+            
+            // Função para criar um coração individual
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.className = 'falling-heart';
+                
+                // Ícone aleatório
+                heart.innerHTML = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                
+                // Posição horizontal aleatória
+                const startRight = Math.random() * 100;
+                heart.style.right = `${startRight}%`;
+                
+                // Tamanho aleatório (menor em dispositivos móveis)
+                const size = isMobile ? 
+                    (Math.random() * 15 + 10) : 
+                    (Math.random() * 25 + 15);
+                heart.style.fontSize = `${size}px`;
+                
+                // Duração aleatória da animação
+                const duration = Math.random() * 5 + 5;
+                heart.style.animationDuration = `${duration}s`;
+                
+                // Opacidade aleatória
+                heart.style.opacity = Math.random() * 0.5 + 0.5;
+                
+                heartsContainer.appendChild(heart);
+                
+                // Remover o coração após a animação terminar
+                setTimeout(() => {
+                    if (heart.parentNode) {
+                        heart.parentNode.removeChild(heart);
+                    }
+                }, duration * 1000);
+            }
+            
+            // Intervalo baseado no tipo de dispositivo
+            const interval = isMobile ? 800 : 300;
+            
+            // Criar corações em intervalos regulares
+            const heartInterval = setInterval(createHeart, interval);
+            
+            // Criar alguns corações inicialmente
+            const initialHearts = isMobile ? 5 : 10;
+            for (let i = 0; i < initialHearts; i++) {
+                setTimeout(createHeart, i * interval);
+            }
+        }
+        
+        // Inicializa a página
+        window.onload = function() {
+            startSlideshow();
+            updateTimeTogether();
+            updateCurrentTime();
+            // Atualiza o contador a cada segundo
+            setInterval(updateTimeTogether, 1000);
+            // Atualiza o horário a cada minuto
+            setInterval(updateCurrentTime, 60000);
+            updateSlideCounter();
+            // Inicia a animação dos corações
+            createFallingHearts();
+            
+            // Tenta reproduzir automaticamente (pode não funcionar em alguns navegadores)
+            audio.play().then(() => {
+                isPlaying = true;
+                playOverlay.style.display = 'none';
+                musicIcon.classList.remove('fa-play');
+                musicIcon.classList.add('fa-pause');
+            }).catch(error => {
+                console.log('Reprodução automática impedida. Mostrando overlay...');
+                // Mostra o overlay para interação do usuário
+                playOverlay.style.display = 'flex';
+            });
+        };
+    </script>
+</body>
+</html>
